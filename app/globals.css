@@ -1,0 +1,27 @@
+@import 'tailwindcss';
+@import './theme.css';
+
+/* Font */
+@font-face {
+  font-family: 'SF Pro Display';
+  font-display: swap;
+  src: url('/assets/fonts/SFProDisplay.woff2') format('woff2');
+}
+
+/* Base style */
+@layer base {
+  html,
+  body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: var(--color-black);
+    color: var(--color-white);
+    font-family: var(--font-sf-pro);
+    -webkit-font-smoothing: antialiased;
+    font-feature-settings:
+      'liga' off,
+      'clig' off;
+  }
+}

@@ -1,0 +1,8 @@
+@theme {
+  /* Colors */
+  --color-white: #ffffff;
+  --color-black: #000000;
+
+  /* Font */
+  --font-sf-pro: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+}
