@@ -3,7 +3,11 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-import { ComingSoonIcon, DownloadIcon, HomeIcon, MoreIcon, SearchIcon } from '@/app/assets/svgs/navigation';
+import ComingSoonIcon from '@/app/assets/svgs/navigation/ComingSoonIcon.svg';
+import DownloadIcon from '@/app/assets/svgs/navigation/DownloadIcon.svg';
+import HomeIcon from '@/app/assets/svgs/navigation/HomeIcon.svg';
+import MoreIcon from '@/app/assets/svgs/navigation/MoreIcon.svg';
+import SearchIcon from '@/app/assets/svgs/navigation/SearchIcon.svg';
 
 const BottomNav = () => {
   const pathname = usePathname();
@@ -42,7 +46,7 @@ const BottomNav = () => {
               className="flex flex-col items-center justify-center min-w-0 flex-1 py-2"
             >
               <div className="w-6 h-6 mb-1 flex items-center justify-center">
-                <Icon color={color} />
+                <Icon className="w-full h-full" style={{ color }} />
               </div>
               <span className="text-caption4 text-center leading-tight" style={{ color }}>
                 {item.label}

@@ -1,4 +1,4 @@
-import { NetflixIcon } from '@/app/assets/svgs/navigation';
+import NetflixIcon from '@/app/assets/svgs/navigation/netflixIcon.svg';
 
 const Header = () => {
   return (
