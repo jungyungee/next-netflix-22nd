@@ -1,7 +1,7 @@
 const SearchPage = () => {
   return (
     <main className="min-h-screen bg-black text-white">
-      <h1 className="text-3xl font-bold">Search</h1>
+      <div className="text-headline1">Search</div>
     </main>
   );
 };
