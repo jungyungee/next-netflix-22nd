@@ -23,7 +23,7 @@ const TrendingMovie = () => {
     const fetchTrending = async () => {
       try {
         const response = await getTrendingAllDay();
-        setItems(response.results);
+        setItems(response.results.slice(0, 10)); // 상위 10개 아이템만 사용
       } catch (error) {
         console.error('Failed to fetch trending data:', error);
       } finally {
