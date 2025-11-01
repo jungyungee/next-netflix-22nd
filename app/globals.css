@@ -5,7 +5,7 @@
 @font-face {
   font-family: 'SF Pro Display';
   font-display: swap;
-  src: url('/assets/fonts/SFProDisplay.woff2') format('woff2');
+  src: url('/fonts/SFProDisplay.woff2') format('woff2');
 }
 
 /* Base style */
@@ -157,5 +157,51 @@
   .scrollbar-hide {
     -ms-overflow-style: none;
     scrollbar-width: none;
+  }
+}
+
+/* Swiper 커스텀 스타일 */
+.movie-swiper {
+  padding: 0 12px 0 16px;
+}
+
+.movie-swiper .swiper-wrapper {
+  padding: 8px 0;
+}
+
+/* Swiper 네비게이션 버튼 커스터마이징 */
+.movie-swiper .swiper-button-prev,
+.movie-swiper .swiper-button-next {
+  width: 40px;
+  height: 40px;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 50%;
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.movie-swiper .swiper-button-prev:hover,
+.movie-swiper .swiper-button-next:hover {
+  background-color: rgba(0, 0, 0, 0.9);
+  transform: scale(1.1);
+}
+
+.movie-swiper .swiper-button-prev::after,
+.movie-swiper .swiper-button-next::after {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+/* 네비게이션 버튼이 비활성화되었을 때 숨김 */
+.movie-swiper .swiper-button-disabled {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* 모바일에서는 네비게이션 버튼 숨김 */
+@media (max-width: 768px) {
+  .movie-swiper .swiper-button-prev,
+  .movie-swiper .swiper-button-next {
+    display: none;
   }
 }
