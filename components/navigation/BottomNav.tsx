@@ -3,7 +3,11 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-import { ComingSoonIcon, DownloadIcon, HomeIcon, MoreIcon, SearchIcon } from '@/app/assets/svgs/navigation';
+import ComingSoonIcon from '@/svgs/navigation/comingSoonIcon.svg';
+import DownloadIcon from '@/svgs/navigation/downloadIcon.svg';
+import HomeIcon from '@/svgs/navigation/homeIcon.svg';
+import MoreIcon from '@/svgs/navigation/moreIcon.svg';
+import SearchIcon from '@/svgs/navigation/searchIcon.svg';
 
 const BottomNav = () => {
   const pathname = usePathname();
@@ -28,7 +32,7 @@ const BottomNav = () => {
   };
 
   return (
-    <nav className="absolute bottom-0 left-0 right-0 z-50 bg-gray-500">
+    <nav className="shrink-0 z-50 bg-black">
       <div className="flex items-center justify-around px-6 py-2">
         {menuItems.map((item) => {
           const { Icon } = item;
@@ -42,7 +46,7 @@ const BottomNav = () => {
               className="flex flex-col items-center justify-center min-w-0 flex-1 py-2"
             >
               <div className="w-6 h-6 mb-1 flex items-center justify-center">
-                <Icon color={color} />
+                <Icon className="w-full h-full" style={{ color }} />
               </div>
               <span className="text-caption4 text-center leading-tight" style={{ color }}>
                 {item.label}
