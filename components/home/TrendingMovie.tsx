@@ -74,7 +74,7 @@ const TrendingMovie = () => {
 
         <div className="absolute flex gap-2 bottom-6 left-1/2 -translate-x-1/2 text-center">
           {/* TOP 10 */}
-          <div className="flex items-center justify-center w-[15px] h-[15px] border border-white">
+          <div className="flex items-center justify-center w-[15px] h-[15px] border border-white translate-y-[3px]">
             <span className="text-[4px] font-extrabold leading-none text-white text-center">
               TOP
               <br />
@@ -83,7 +83,7 @@ const TrendingMovie = () => {
           </div>
 
           <span className="text-subhead3 text-white tracking-wide drop-shadow-md">
-            # {currentIndex + 1} in Trending Today
+            #{currentIndex + 1} in Trending Today
           </span>
         </div>
       </div>
