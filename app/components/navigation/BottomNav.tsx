@@ -3,11 +3,11 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-import ComingSoonIcon from '@/app/assets/svgs/navigation/ComingSoonIcon.svg';
-import DownloadIcon from '@/app/assets/svgs/navigation/DownloadIcon.svg';
-import HomeIcon from '@/app/assets/svgs/navigation/HomeIcon.svg';
-import MoreIcon from '@/app/assets/svgs/navigation/MoreIcon.svg';
-import SearchIcon from '@/app/assets/svgs/navigation/SearchIcon.svg';
+import ComingSoonIcon from '@/app/assets/svgs/navigation/comingSoonIcon.svg';
+import DownloadIcon from '@/app/assets/svgs/navigation/downloadIcon.svg';
+import HomeIcon from '@/app/assets/svgs/navigation/homeIcon.svg';
+import MoreIcon from '@/app/assets/svgs/navigation/moreIcon.svg';
+import SearchIcon from '@/app/assets/svgs/navigation/searchIcon.svg';
 
 const BottomNav = () => {
   const pathname = usePathname();
