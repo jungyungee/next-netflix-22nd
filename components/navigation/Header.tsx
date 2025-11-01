@@ -2,7 +2,7 @@ import NetflixIcon from '@/svgs/navigation/netflixIcon.svg';
 
 const Header = () => {
   return (
-    <header className="sticky top-0 left-0 right-0 z-50 bg-linear-to-b from-black/90 to-transparent">
+    <header className="absolute top-0 left-0 right-0 z-50 bg-linear-to-b from-black/90 to-transparent">
       <div className="flex items-center justify-between px-5 py-6">
         {/* 왼쪽: Netflix 아이콘 */}
         <div className="flex items-center">

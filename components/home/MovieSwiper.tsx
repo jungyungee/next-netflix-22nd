@@ -38,7 +38,7 @@ const MovieSwiper = ({ title, items, itemWidth, itemHeight, shape = 'rectangle' 
   return (
     <div className="w-full">
       {/* 섹션 제목 */}
-      <h2 className="mb-[14px] px-4 text-headline3 text-white">{title}</h2>
+      <h2 className="mb-3.5 px-4 text-headline3 text-white">{title}</h2>
 
       {/* Swiper 컨테이너 */}
       <Swiper
