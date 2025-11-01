@@ -8,14 +8,16 @@ import KoreaMovie from '@/components/home/KoreaMovie';
 import NetflixOriginal from '@/components/home/NetflixOriginal';
 import Preview from '@/components/home/Preview';
 import TopRatedMovies from '@/components/home/TopRatedMovies';
+import TrendingAll from '@/components/home/TrendingMovie';
 import Header from '@/components/navigation/Header';
 
 const HomePage = () => {
   return (
     <main className="bg-black text-white">
       <Header />
+      <TrendingAll />
       {/* 섹션 컨테이너 */}
-      <div className="flex flex-col gap-[22px] pb-[72px] pt-[44px]">
+      <div className="flex flex-col gap-[22px] pb-[72px] pt-11">
         <Preview />
         <GenrePreview />
         <NetflixOriginal />
