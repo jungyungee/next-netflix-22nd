@@ -10,9 +10,8 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
 import { getTrendingAllDay } from '@/apis/home';
+import { getImageUrl } from '@/constants/imageURL';
 import { Movie } from '@/types/tmdb';
-
-const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w500';
 
 const TrendingMovie = () => {
   const [items, setItems] = useState<Movie[]>([]);
@@ -44,7 +43,7 @@ const TrendingMovie = () => {
   return (
     <section className="relative w-full flex flex-col items-center">
       {/* 포스터 영역 */}
-      <div className="relative w-full overflow-hidden bg-black aspect-2/3">
+      <div className="relative w-full h-[415px] overflow-hidden bg-black">
         <AnimatePresence mode="wait">
           <motion.div
             key={currentItem.id}
@@ -54,25 +53,19 @@ const TrendingMovie = () => {
             transition={{ duration: 0.8 }}
             className="absolute inset-0"
           >
-            {currentItem.poster_path ? (
-              <Image
-                src={`${IMAGE_BASE_URL}${currentItem.poster_path}`}
-                alt={currentItem.title || 'Untitled'}
-                fill
-                sizes="100%"
-                className="object-cover"
-                priority
-              />
-            ) : (
-              <div className="w-full h-full bg-black flex items-center justify-center text-gray-400 text-sm">
-                No Image
-              </div>
-            )}
+            <Image
+              src={getImageUrl(currentItem.poster_path, 'LARGE')}
+              alt={currentItem.title || 'Untitled'}
+              fill
+              sizes="100%"
+              className="object-cover"
+              priority
+            />
             <div className="absolute bottom-0 left-0 right-0 h-32 bg-linear-to-t from-black via-black/60 to-transparent" />
           </motion.div>
         </AnimatePresence>
 
-        <div className="absolute flex gap-2 bottom-6 left-1/2 -translate-x-1/2 text-center">
+        <div className="absolute flex gap-2 bottom-3 left-1/2 -translate-x-1/2 text-center">
           {/* TOP 10 */}
           <div className="flex items-center justify-center w-[15px] h-[15px] border border-white translate-y-[3px]">
             <span className="text-[4px] font-extrabold leading-none text-white text-center">
