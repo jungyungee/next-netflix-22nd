@@ -3,7 +3,7 @@
  * 특정 미디어의 상세 정보를 조회하는 API를 제공합니다.
  */
 
-import { axiosInstance } from '@/app/apis/axiosInstance';
+import { axiosInstance } from '@/apis/axiosInstance';
 
 /**
  * 특정 미디어의 상세 정보 조회

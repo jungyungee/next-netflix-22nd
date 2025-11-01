@@ -3,7 +3,7 @@
  * 홈 페이지의 각 섹션에서 사용하는 영화 및 TV 데이터를 가져옵니다.
  */
 
-import { axiosInstance } from '@/app/apis/axiosInstance';
+import { axiosInstance } from '@/apis/axiosInstance';
 
 /**
  * 오늘의 트렌딩 콘텐츠 (영화 + TV 프로그램)

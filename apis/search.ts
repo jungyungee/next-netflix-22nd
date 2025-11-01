@@ -3,7 +3,7 @@
  * 검색 기능에 사용되는 API를 제공합니다.
  */
 
-import { axiosInstance } from '@/app/apis/axiosInstance';
+import { axiosInstance } from '@/apis/axiosInstance';
 
 /**
  * 통합 검색 (영화 + TV 프로그램 + 인물)
