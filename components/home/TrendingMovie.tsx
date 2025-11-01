@@ -37,7 +37,16 @@ const TrendingMovie = () => {
     return () => clearInterval(interval);
   }, [items]);
 
-  if (loading || items.length === 0) return null;
+  if (loading || items.length === 0) {
+    return (
+      <section className="relative w-full flex flex-col items-center">
+        <div className="relative w-full h-[415px] overflow-hidden bg-black">
+          <div className="absolute inset-0 bg-gray-700 animate-pulse" />
+        </div>
+      </section>
+    );
+  }
+
   const currentItem = items[currentIndex];
 
   return (
@@ -76,7 +85,7 @@ const TrendingMovie = () => {
           </div>
 
           <span className="text-subhead3 text-white tracking-wide drop-shadow-md">
-            #{currentIndex + 1} in Trending Today
+            #{currentIndex + 1} in Korea Today
           </span>
         </div>
       </div>

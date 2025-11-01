@@ -1,8 +1,8 @@
-import Loading from "@/components/common/Loading";
+import Loading from '@/components/common/Loading';
 
 const SearchPage = () => {
   return (
-<main className="min-h-screen bg-black text-white flex items-center justify-center">
+    <main className="min-h-screen bg-black text-white flex items-center justify-center">
       <Loading />
     </main>
   );
