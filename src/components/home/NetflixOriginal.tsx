@@ -7,8 +7,8 @@
 
 import { useEffect, useState } from 'react';
 
-import { getTVByNetwork } from '@/apis/home';
 import MovieSwiper from '@/components/home/MovieSwiper';
+import { getTVByNetwork } from '@/lib/api';
 import { TV } from '@/types/tmdb';
 
 const NetflixOriginal = () => {
@@ -26,9 +26,7 @@ const NetflixOriginal = () => {
     fetchTVShows();
   }, []);
 
-  if (loading) {
-    return null;
-  }
+  if (loading) return null;
 
   return <MovieSwiper title="Netflix Originals" items={tvShows} itemWidth="154px" itemHeight="251px" />;
 };

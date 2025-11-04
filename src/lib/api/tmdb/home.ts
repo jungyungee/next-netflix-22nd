@@ -3,7 +3,7 @@
  * 홈 페이지의 각 섹션에서 사용하는 영화 및 TV 데이터를 가져옵니다.
  */
 
-import { axiosInstance } from '@/apis/axiosInstance';
+import { axiosInstance } from '@/lib/api/axiosInstance';
 
 /**
  * 오늘의 트렌딩 콘텐츠 (영화 + TV 프로그램)
@@ -12,13 +12,11 @@ import { axiosInstance } from '@/apis/axiosInstance';
  */
 export const getTrendingAllDay = async () => {
   try {
-    const res = await axiosInstance.get('/trending/all/day', {
-      params: { language: 'ko-KR' },
-    });
+    const res = await axiosInstance.get('/trending/all/day', { params: { language: 'ko-KR' } });
     return res.data;
   } catch (err) {
     console.error('getTrendingAllDay data error', err);
-    return { results: [] };
+    return { results: [] } as const;
   }
 };
 
@@ -30,16 +28,12 @@ export const getTrendingAllDay = async () => {
 export const getMoviesByGenre = async (genreIds: string) => {
   try {
     const res = await axiosInstance.get('/discover/movie', {
-      params: {
-        with_genres: genreIds,
-        sort_by: 'popularity.desc',
-        language: 'ko-KR',
-      },
+      params: { with_genres: genreIds, sort_by: 'popularity.desc', language: 'ko-KR' },
     });
     return res.data;
   } catch (err) {
     console.error('getMoviesByGenre data error', err);
-    return { results: [] };
+    return { results: [] } as const;
   }
 };
 
@@ -50,16 +44,11 @@ export const getMoviesByGenre = async (genreIds: string) => {
  */
 export const getTVByNetwork = async (networkId: number) => {
   try {
-    const res = await axiosInstance.get('/discover/tv', {
-      params: {
-        with_networks: networkId,
-        language: 'ko-KR',
-      },
-    });
+    const res = await axiosInstance.get('/discover/tv', { params: { with_networks: networkId, language: 'ko-KR' } });
     return res.data;
   } catch (err) {
     console.error('getTVByNetwork data error', err);
-    return { results: [] };
+    return { results: [] } as const;
   }
 };
 
@@ -71,15 +60,12 @@ export const getTVByNetwork = async (networkId: number) => {
 export const getMoviesByCompany = async (companyId: number) => {
   try {
     const res = await axiosInstance.get('/discover/movie', {
-      params: {
-        with_companies: companyId,
-        language: 'ko-KR',
-      },
+      params: { with_companies: companyId, language: 'ko-KR' },
     });
     return res.data;
   } catch (err) {
     console.error('getMoviesByCompany data error', err);
-    return { results: [] };
+    return { results: [] } as const;
   }
 };
 
@@ -90,13 +76,11 @@ export const getMoviesByCompany = async (companyId: number) => {
  */
 export const getMoviePopular = async (page: number = 1) => {
   try {
-    const res = await axiosInstance.get('movie/popular', {
-      params: { language: 'ko-KR', page },
-    });
+    const res = await axiosInstance.get('movie/popular', { params: { language: 'ko-KR', page } });
     return res.data;
   } catch (err) {
     console.error('getMoviePopular data error', err);
-    return { results: [] };
+    return { results: [] } as const;
   }
 };
 
@@ -113,7 +97,7 @@ export const getKoreaMovie = async () => {
     return res.data;
   } catch (err) {
     console.error('getKoreaMovie data error', err);
-    return { results: [] };
+    return { results: [] } as const;
   }
 };
 
@@ -123,12 +107,10 @@ export const getKoreaMovie = async () => {
  */
 export const getTopRatedMovies = async () => {
   try {
-    const res = await axiosInstance.get('/movie/top_rated', {
-      params: { language: 'ko-KR' },
-    });
+    const res = await axiosInstance.get('/movie/top_rated', { params: { language: 'ko-KR' } });
     return res.data;
   } catch (err) {
     console.error('getTopRatedMovies data error', err);
-    return { results: [] };
+    return { results: [] } as const;
   }
 };

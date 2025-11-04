@@ -50,21 +50,10 @@ const MovieSwiper = ({ title, items, itemWidth, itemHeight, shape = 'rectangle' 
         className="movie-swiper"
       >
         {items.map((item) => (
-          <SwiperSlide
-            key={item.id}
-            style={{
-              width: itemWidth,
-              height: itemHeight,
-            }}
-            className="w-auto!"
-          >
+          <SwiperSlide key={item.id} style={{ width: itemWidth, height: itemHeight }} className="w-auto!">
             <div
               className="relative overflow-hidden bg-gray-800"
-              style={{
-                width: itemWidth,
-                height: itemHeight,
-                borderRadius: shape === 'circle' ? '50%' : '8px',
-              }}
+              style={{ width: itemWidth, height: itemHeight, borderRadius: shape === 'circle' ? '50%' : '8px' }}
             >
               {item.poster_path ? (
                 <Image

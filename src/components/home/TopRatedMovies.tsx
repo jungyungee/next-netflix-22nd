@@ -1,23 +1,23 @@
 'use client';
 
 /**
- * KoreaMovie 섹션 컴포넌트
- * 한국 영화를 표시합니다.
+ * TopRatedMovies 섹션 컴포넌트
+ * 높은 평점의 영화를 표시합니다.
  */
 
 import { useEffect, useState } from 'react';
 
-import { getKoreaMovie } from '@/apis/home';
 import MovieSwiper from '@/components/home/MovieSwiper';
+import { getTopRatedMovies } from '@/lib/api';
 import { Movie } from '@/types/tmdb';
 
-const KoreaMovie = () => {
+const TopRatedMovies = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchMovies = async () => {
-      const response = await getKoreaMovie();
+      const response = await getTopRatedMovies();
       setMovies(response.results);
       setLoading(false);
     };
@@ -25,11 +25,9 @@ const KoreaMovie = () => {
     fetchMovies();
   }, []);
 
-  if (loading) {
-    return null;
-  }
+  if (loading) return null;
 
-  return <MovieSwiper title="Korea Movies" items={movies} itemWidth="103px" itemHeight="161px" />;
+  return <MovieSwiper title="Top Rated Movies" items={movies} itemWidth="103px" itemHeight="161px" />;
 };
 
-export default KoreaMovie;
+export default TopRatedMovies;

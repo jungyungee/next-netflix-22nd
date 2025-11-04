@@ -7,8 +7,8 @@
 
 import { useEffect, useState } from 'react';
 
-import { getMoviesByGenre } from '@/apis/home';
 import MovieSwiper from '@/components/home/MovieSwiper';
+import { getMoviesByGenre } from '@/lib/api';
 import { Movie } from '@/types/tmdb';
 
 const GenrePreview = () => {
@@ -26,9 +26,7 @@ const GenrePreview = () => {
     fetchMovies();
   }, []);
 
-  if (loading) {
-    return null;
-  }
+  if (loading) return null;
 
   return <MovieSwiper title="Action & Adventure Movies" items={movies} itemWidth="103px" itemHeight="177px" />;
 };

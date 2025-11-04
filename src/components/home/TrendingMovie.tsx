@@ -9,8 +9,8 @@ import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
-import { getTrendingAllDay } from '@/apis/home';
 import { getImageUrl } from '@/constants/imageURL';
+import { getTrendingAllDay } from '@/lib/api';
 import { Movie } from '@/types/tmdb';
 
 const TrendingMovie = () => {
