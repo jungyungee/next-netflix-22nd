@@ -15,9 +15,7 @@ type QueryParams = Record<string, string | number | boolean | undefined>;
  * @returns JSON 응답 데이터
  */
 export async function tmdbGet(path: string, params: QueryParams = {}) {
-  // path가 /로 시작하면 제거 (BASE_URL 끝에 /3이 유지되도록)
-  const cleanPath = path.startsWith('/') ? path.slice(1) : path;
-  const url = new URL(`${BASE_URL}/${cleanPath}`); // TMDB API 베이스 URL
+  const url = new URL(`${BASE_URL}${path}`); // TMDB API 베이스 URL
 
   // 기본 파라미터 설정
   url.searchParams.set('api_key', API_KEY); // TMDB API 키 (모든 요청에 자동 포함)
@@ -32,7 +30,9 @@ export async function tmdbGet(path: string, params: QueryParams = {}) {
     }
   });
 
-  const res = await fetch(url.toString(), { cache: 'no-store' });
+  const res = await fetch(url.toString(), {
+    next: { revalidate: 3600 }, // 1시간마다 데이터 갱신
+  });
 
   if (!res.ok) {
     throw new Error(`TMDB API error: ${res.status} ${res.statusText}`);
