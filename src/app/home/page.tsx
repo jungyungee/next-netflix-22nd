@@ -3,13 +3,13 @@
  * 넷플릭스 클론의 메인 페이지로, 다양한 영화 및 TV 프로그램 섹션을 표시합니다.
  */
 
+import PlayBar from '@/components/home/client/PlayBar';
 import GenrePreview from '@/components/home/server/GenrePreview';
 import KoreaMovie from '@/components/home/server/KoreaMovie';
 import NetflixOriginal from '@/components/home/server/NetflixOriginal';
 import Preview from '@/components/home/server/Preview';
 import TopRatedMovies from '@/components/home/server/TopRatedMovies';
 import TrendingMovies from '@/components/home/server/TrendingMovie';
-import PlayBar from '@/components/home/client/PlayBar';
 import Header from '@/components/navigation/Header';
 
 const HomePage = () => {
