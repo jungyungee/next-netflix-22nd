@@ -3,7 +3,7 @@
  * 홈 페이지의 각 섹션에서 사용하는 영화 및 TV 데이터를 가져옵니다.
  */
 
-import { axiosInstance } from '@/lib/api/axiosInstance';
+import { tmdbGet } from '@/lib/api/tmdbClient';
 
 /**
  * 오늘의 트렌딩 콘텐츠 (영화 + TV 프로그램)
@@ -12,8 +12,7 @@ import { axiosInstance } from '@/lib/api/axiosInstance';
  */
 export const getTrendingAllDay = async () => {
   try {
-    const res = await axiosInstance.get('/trending/all/day', { params: { language: 'ko-KR' } });
-    return res.data;
+    return await tmdbGet('/trending/all/day', { language: 'ko-KR' });
   } catch (err) {
     console.error('getTrendingAllDay data error', err);
     return { results: [] } as const;
@@ -27,10 +26,11 @@ export const getTrendingAllDay = async () => {
  */
 export const getMoviesByGenre = async (genreIds: string) => {
   try {
-    const res = await axiosInstance.get('/discover/movie', {
-      params: { with_genres: genreIds, sort_by: 'popularity.desc', language: 'ko-KR' },
+    return await tmdbGet('/discover/movie', {
+      with_genres: genreIds,
+      sort_by: 'popularity.desc',
+      language: 'ko-KR',
     });
-    return res.data;
   } catch (err) {
     console.error('getMoviesByGenre data error', err);
     return { results: [] } as const;
@@ -44,8 +44,7 @@ export const getMoviesByGenre = async (genreIds: string) => {
  */
 export const getTVByNetwork = async (networkId: number) => {
   try {
-    const res = await axiosInstance.get('/discover/tv', { params: { with_networks: networkId, language: 'ko-KR' } });
-    return res.data;
+    return await tmdbGet('/discover/tv', { with_networks: networkId, language: 'ko-KR' });
   } catch (err) {
     console.error('getTVByNetwork data error', err);
     return { results: [] } as const;
@@ -59,10 +58,7 @@ export const getTVByNetwork = async (networkId: number) => {
  */
 export const getMoviesByCompany = async (companyId: number) => {
   try {
-    const res = await axiosInstance.get('/discover/movie', {
-      params: { with_companies: companyId, language: 'ko-KR' },
-    });
-    return res.data;
+    return await tmdbGet('/discover/movie', { with_companies: companyId, language: 'ko-KR' });
   } catch (err) {
     console.error('getMoviesByCompany data error', err);
     return { results: [] } as const;
@@ -76,8 +72,7 @@ export const getMoviesByCompany = async (companyId: number) => {
  */
 export const getMoviePopular = async (page: number = 1) => {
   try {
-    const res = await axiosInstance.get('movie/popular', { params: { language: 'ko-KR', page } });
-    return res.data;
+    return await tmdbGet('/movie/popular', { language: 'ko-KR', page });
   } catch (err) {
     console.error('getMoviePopular data error', err);
     return { results: [] } as const;
@@ -91,10 +86,7 @@ export const getMoviePopular = async (page: number = 1) => {
  */
 export const getKoreaMovie = async () => {
   try {
-    const res = await axiosInstance.get('/discover/movie', {
-      params: { with_original_language: 'ko', language: 'ko-KR' },
-    });
-    return res.data;
+    return await tmdbGet('/discover/movie', { with_original_language: 'ko', language: 'ko-KR' });
   } catch (err) {
     console.error('getKoreaMovie data error', err);
     return { results: [] } as const;
@@ -107,8 +99,7 @@ export const getKoreaMovie = async () => {
  */
 export const getTopRatedMovies = async () => {
   try {
-    const res = await axiosInstance.get('/movie/top_rated', { params: { language: 'ko-KR' } });
-    return res.data;
+    return await tmdbGet('/movie/top_rated', { language: 'ko-KR' });
   } catch (err) {
     console.error('getTopRatedMovies data error', err);
     return { results: [] } as const;
