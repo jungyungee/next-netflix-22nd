@@ -3,7 +3,7 @@
  * 한국 영화를 표시합니다.
  */
 
-import MovieSwiper from '@/components/home/MovieSwiper';
+import MovieSwiper from '@/components/home/client/MovieSwiper';
 import { getKoreaMovie } from '@/lib/api';
 
 const KoreaMovie = async () => {

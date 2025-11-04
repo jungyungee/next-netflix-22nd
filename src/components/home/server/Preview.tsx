@@ -3,7 +3,7 @@
  * 인기 영화를 원형 이미지로 미리보기 형태로 표시합니다.
  */
 
-import MovieSwiper from '@/components/home/MovieSwiper';
+import MovieSwiper from '@/components/home/client/MovieSwiper';
 import { getMoviePopular } from '@/lib/api';
 
 const Preview = async () => {

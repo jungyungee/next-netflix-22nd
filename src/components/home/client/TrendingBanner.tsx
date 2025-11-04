@@ -1,8 +1,8 @@
 'use client';
 
 /**
- * TrendingMovieClient 컴포넌트 (Client Component)
- * 데이터를 5초마다 자동으로 변경하고 순위를 함께 표시합니다.
+ * TrendingBanner 컴포넌트 (Client Component)
+ * 트렌딩 영화를 5초마다 자동으로 변경하며 순위를 함께 표시합니다.
  */
 
 import { AnimatePresence, motion } from 'framer-motion';
@@ -12,11 +12,11 @@ import { useEffect, useState } from 'react';
 import { getImageUrl } from '@/constants/imageURL';
 import { Movie } from '@/types/tmdb';
 
-interface TrendingMovieClientProps {
+interface TrendingBannerProps {
   items: Movie[];
 }
 
-const TrendingMovieClient = ({ items }: TrendingMovieClientProps) => {
+const TrendingBanner = ({ items }: TrendingBannerProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   // 5초마다 자동 전환
@@ -84,4 +84,4 @@ const TrendingMovieClient = ({ items }: TrendingMovieClientProps) => {
   );
 };
 
-export default TrendingMovieClient;
+export default TrendingBanner;

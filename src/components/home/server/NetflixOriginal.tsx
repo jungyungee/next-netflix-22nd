@@ -3,7 +3,7 @@
  * 넷플릭스 오리지널 TV 프로그램을 표시합니다.
  */
 
-import MovieSwiper from '@/components/home/MovieSwiper';
+import MovieSwiper from '@/components/home/client/MovieSwiper';
 import { getTVByNetwork } from '@/lib/api';
 
 const NetflixOriginal = async () => {

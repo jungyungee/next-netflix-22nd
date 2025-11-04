@@ -3,7 +3,7 @@
  * 높은 평점의 영화를 표시합니다.
  */
 
-import MovieSwiper from '@/components/home/MovieSwiper';
+import MovieSwiper from '@/components/home/client/MovieSwiper';
 import { getTopRatedMovies } from '@/lib/api';
 
 const TopRatedMovies = async () => {
