@@ -3,7 +3,7 @@
  * 특정 미디어의 상세 정보를 조회하는 API를 제공합니다.
  */
 
-import { axiosInstance } from '@/apis/axiosInstance';
+import { tmdbGet } from '@/lib/api/tmdbClient';
 
 /**
  * 특정 미디어의 상세 정보 조회
@@ -13,10 +13,7 @@ import { axiosInstance } from '@/apis/axiosInstance';
  */
 export const getDetail = async (media_type: string, id: string) => {
   try {
-    const res = await axiosInstance.get(`/${media_type}/${id}`, {
-      params: { language: 'ko-KR' },
-    });
-    return res.data;
+    return await tmdbGet(`/${media_type}/${id}`, { language: 'ko-KR' });
   } catch (err) {
     console.error('getDetail data error', err);
     return null;

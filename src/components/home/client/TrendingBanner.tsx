@@ -1,32 +1,23 @@
 'use client';
 
 /**
- * TrendingMovie 컴포넌트
- * 오늘의 트렌딩 콘텐츠를 5초마다 자동으로 변경하며 순위를 함께 표시합니다.
+ * TrendingBanner 컴포넌트 (Client Component)
+ * 트렌딩 영화를 5초마다 자동으로 변경하며 순위를 함께 표시합니다.
  */
 
 import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
-import { getTrendingAllDay } from '@/apis/home';
 import { getImageUrl } from '@/constants/imageURL';
 import { Movie } from '@/types/tmdb';
 
-const TrendingMovie = () => {
-  const [items, setItems] = useState<Movie[]>([]);
+interface TrendingBannerProps {
+  items: Movie[];
+}
+
+const TrendingBanner = ({ items }: TrendingBannerProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchTrending = async () => {
-      const response = await getTrendingAllDay();
-      setItems(response.results.slice(0, 10)); // 상위 10개 아이템만 사용
-      setLoading(false);
-    };
-
-    fetchTrending();
-  }, []);
 
   // 5초마다 자동 전환
   useEffect(() => {
@@ -37,7 +28,7 @@ const TrendingMovie = () => {
     return () => clearInterval(interval);
   }, [items]);
 
-  if (loading || items.length === 0) {
+  if (items.length === 0) {
     return (
       <section className="relative w-full flex flex-col items-center">
         <div className="relative w-full h-[415px] overflow-hidden bg-black">
@@ -93,4 +84,4 @@ const TrendingMovie = () => {
   );
 };
 
-export default TrendingMovie;
+export default TrendingBanner;
