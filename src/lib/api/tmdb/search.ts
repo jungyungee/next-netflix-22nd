@@ -4,6 +4,7 @@
  */
 
 import { tmdbGet } from '@/lib/api/tmdbClient';
+import type { Media, TMDBListResponse } from '@/types/tmdb';
 
 /**
  * 통합 검색 (영화 + TV 프로그램 + 인물)
@@ -11,11 +12,11 @@ import { tmdbGet } from '@/lib/api/tmdbClient';
  * @param page - 페이지 번호 (기본값: 1)
  * @returns 검색 결과 (영화, TV, 인물 포함)
  */
-export const searchMulti = async (query: string, page: number = 1) => {
+export const searchMulti = async (query: string, page: number = 1): Promise<TMDBListResponse<Media>> => {
   try {
     return await tmdbGet('/search/multi', { query, language: 'ko-KR', page, include_adult: 'false' });
   } catch (err) {
     console.error('searchMulti data error', err);
-    return { results: [] };
+    return { page: 1, results: [], total_pages: 0, total_results: 0 };
   }
 };
