@@ -12,7 +12,7 @@ interface MediaCardProps {
 
 const MediaCard = ({ item }: MediaCardProps) => {
   return (
-    <Link href={`/detail/${getMediaType(item)}/${item.id}`}>
+    <Link href={`/detail/${getMediaType(item)}/${item.id}`} className="block">
       <div className="h-[76px] flex items-center relative overflow-hidden bg-gray-300">
         {/* 이미지 */}
         <div className="w-[146px] h-[76px] relative shrink-0">
