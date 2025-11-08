@@ -66,7 +66,8 @@ const SearchResults = ({ query }: SearchResultsProps) => {
     );
   }
 
-  const allResults = data?.pages.flatMap((page) => page.results) || [];
+  // 배우(person) 제외, 영화와 TV만 포함
+  const allResults = data?.pages.flatMap((page) => page.results.filter((item) => item.media_type !== 'person')) || [];
 
   if (allResults.length === 0) {
     return (

@@ -13,7 +13,7 @@ interface BaseMedia {
   overview?: string; // 줄거리 요약
   vote_average?: number; // 평균 평점 (0-10)
   popularity?: number; // 인기도 점수
-  media_type?: 'movie' | 'tv'; // 미디어 타입 (영화 또는 TV)
+  media_type?: 'movie' | 'tv' | 'person'; // 미디어 타입 (영화, TV, 인물)
 }
 
 /**
