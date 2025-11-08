@@ -10,6 +10,7 @@ import 'swiper/css/free-mode';
 import 'swiper/css/navigation';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import { FreeMode, Navigation } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
@@ -34,6 +35,13 @@ const getTitle = (item: Movie | TV): string => {
   return 'title' in item ? item.title : item.name;
 };
 
+/**
+ * 미디어 타입 확인 헬퍼 함수 (movie: title 속성 존재 시, tv: name 속성 존재 시)
+ */
+const getMediaType = (item: Movie | TV): 'movie' | 'tv' => {
+  return 'title' in item ? 'movie' : 'tv';
+};
+
 const MovieSwiper = ({ title, items, itemWidth, itemHeight, shape = 'rectangle' }: MovieSwiperProps) => {
   return (
     <div className="w-full">
@@ -51,23 +59,25 @@ const MovieSwiper = ({ title, items, itemWidth, itemHeight, shape = 'rectangle' 
       >
         {items.map((item) => (
           <SwiperSlide key={item.id} style={{ width: itemWidth, height: itemHeight }} className="w-auto!">
-            <div
+            <Link href={`/detail/${getMediaType(item)}/${item.id}`}>
+              <div
               className="relative overflow-hidden bg-gray-800"
-              style={{ width: itemWidth, height: itemHeight, borderRadius: shape === 'circle' ? '50%' : '8px' }}
-            >
-              {item.poster_path ? (
-                <Image
-                  src={getImageUrl(item.poster_path, 'LARGE')}
-                  alt={getTitle(item)}
-                  fill
-                  sizes="(max-width: 768px) 50vw, 33vw"
-                  className="object-cover"
-                />
-              ) : (
-                // poster_path가 없을 경우 플레이스홀더
-                <div className="flex h-full w-full items-center justify-center bg-gray-700 text-gray-500">No Image</div>
-              )}
-            </div>
+                style={{ width: itemWidth, height: itemHeight, borderRadius: shape === 'circle' ? '50%' : '8px' }}
+              >
+                {item.poster_path ? (
+                  <Image
+                    src={getImageUrl(item.poster_path, 'LARGE')}
+                    alt={getTitle(item)}
+                    fill
+                    sizes="(max-width: 768px) 50vw, 33vw"
+                    className="object-cover"
+                  />
+                ) : (
+                  // poster_path가 없을 경우 플레이스홀더
+                  <div className="flex h-full w-full items-center justify-center bg-gray-700 text-gray-500">No Image</div>
+                )}
+              </div>
+            </Link>
           </SwiperSlide>
         ))}
       </Swiper>

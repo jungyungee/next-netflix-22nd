@@ -9,6 +9,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
+import PlayBar from '@/components/home/client/PlayBar';
 import { getImageUrl } from '@/constants/imageURL';
 import { Movie } from '@/types/tmdb';
 
@@ -79,6 +80,10 @@ const TrendingBanner = ({ items }: TrendingBannerProps) => {
             #{currentIndex + 1} in Korea Today
           </span>
         </div>
+      </div>
+      {/* PlayBar 컴포넌트 이동 (상세페이지로 이동 가능) */}
+      <div className="mt-4">
+        <PlayBar mediaId={currentItem.id} mediaType={currentItem.media_type ?? 'movie'} />
       </div>
     </section>
   );
