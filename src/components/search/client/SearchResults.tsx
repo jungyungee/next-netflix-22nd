@@ -5,6 +5,7 @@ import { useEffect, useRef } from 'react';
 
 import MediaCard from '@/components/search/client/MediaCard';
 import { searchMulti } from '@/lib/api/tmdb/search';
+import { removeDuplicateMedia } from '@/lib/utils/media';
 import type { Media } from '@/types/tmdb';
 
 interface SearchResultsProps {
@@ -69,7 +70,10 @@ const SearchResults = ({ query }: SearchResultsProps) => {
   // 배우(person) 제외, 영화와 TV만 포함
   const allResults = data?.pages.flatMap((page) => page.results.filter((item) => item.media_type !== 'person')) || [];
 
-  if (allResults.length === 0) {
+  // 중복 제거
+  const uniqueResults = removeDuplicateMedia(allResults);
+
+  if (uniqueResults.length === 0) {
     return (
       <div className="px-5 py-10 text-center">
         <p className="text-white">No results found</p>
@@ -81,7 +85,7 @@ const SearchResults = ({ query }: SearchResultsProps) => {
     <div>
       <h2 className="py-[21px] text-headline2 text-white">Search Results</h2>
       <div className="space-y-[2px]">
-        {allResults.map((item) => (
+        {uniqueResults.map((item) => (
           <MediaCard key={`${item.id}-${item.media_type}`} item={item as Media} />
         ))}
       </div>

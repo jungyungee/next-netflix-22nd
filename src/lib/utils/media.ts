@@ -19,3 +19,14 @@ export const getMediaTitle = (item: Media): string => {
 export const getMediaType = (item: Media): 'movie' | 'tv' => {
   return 'title' in item ? 'movie' : 'tv';
 };
+
+/**
+ * Media 배열에서 중복을 제거하는 유틸리티 함수
+ * @param items - Media 객체 배열
+ * @returns 중복이 제거된 Media 객체 배열
+ */
+export const removeDuplicateMedia = (items: Media[]): Media[] => {
+  return items.filter(
+    (item, index, self) => index === self.findIndex((t) => t.id === item.id && t.media_type === item.media_type),
+  );
+};

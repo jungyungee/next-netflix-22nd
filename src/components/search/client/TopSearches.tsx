@@ -5,6 +5,7 @@ import { useEffect, useRef } from 'react';
 
 import MediaCard from '@/components/search/client/MediaCard';
 import { getTrendingAllDay } from '@/lib/api/tmdb/home';
+import { removeDuplicateMedia } from '@/lib/utils/media';
 import type { Media } from '@/types/tmdb';
 
 const TopSearches = () => {
@@ -61,7 +62,10 @@ const TopSearches = () => {
 
   const allResults = data.pages.flatMap((page) => page.results) || [];
 
-  if (allResults.length === 0) {
+  // 중복 제거
+  const uniqueResults = removeDuplicateMedia(allResults as Media[]);
+
+  if (uniqueResults.length === 0) {
     return null;
   }
 
@@ -69,7 +73,7 @@ const TopSearches = () => {
     <div>
       <h2 className="py-[21px] text-headline2 text-white">Top Searches</h2>
       <div className="space-y-[2px]">
-        {allResults.map((item) => (
+        {uniqueResults.map((item) => (
           <MediaCard key={`${item.id}-${item.media_type || 'unknown'}`} item={item as Media} />
         ))}
       </div>
