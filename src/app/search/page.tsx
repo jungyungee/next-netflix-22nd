@@ -1,9 +1,9 @@
-import Loading from '@/components/common/Loading';
+import SearchContent from '@/components/search/client/SearchContent';
 
 const SearchPage = () => {
   return (
-    <main className="min-h-screen bg-black text-white flex items-center justify-center">
-      <Loading />
+    <main className="min-h-screen bg-black text-white">
+      <SearchContent />
     </main>
   );
 };
