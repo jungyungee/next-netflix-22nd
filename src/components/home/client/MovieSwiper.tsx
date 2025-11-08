@@ -36,7 +36,7 @@ const getTitle = (item: Movie | TV): string => {
 };
 
 /**
- * 미디어 타입 확인 헬퍼 함수
+ * 미디어 타입 확인 헬퍼 함수 (movie: title 속성 존재 시, tv: name 속성 존재 시)
  */
 const getMediaType = (item: Movie | TV): 'movie' | 'tv' => {
   return 'title' in item ? 'movie' : 'tv';

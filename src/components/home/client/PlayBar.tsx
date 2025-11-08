@@ -7,8 +7,8 @@ import InfoIcon from '@/svgs/navigation/infoIcon.svg';
 import PlayIcon from '@/svgs/navigation/playIcon.svg';
 
 interface PlayBarProps {
-  mediaId: number; // 항상 존재
-  mediaType?: 'movie' | 'tv'; // 기본 movie
+  mediaId: number;
+  mediaType?: 'movie' | 'tv';
 }
 
 const PlayBar = ({ mediaId, mediaType = 'movie' }: PlayBarProps) => {
