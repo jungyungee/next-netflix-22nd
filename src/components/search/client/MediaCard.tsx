@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { getImageUrl } from '@/constants/imageURL';
-import { getMediaTitle } from '@/lib/utils/media';
+import { getMediaTitle, getMediaType } from '@/lib/utils/media';
 import PlayButton from '@/svgs/search/playButton.svg';
 import type { Media } from '@/types/tmdb';
 
@@ -12,7 +12,7 @@ interface MediaCardProps {
 
 const MediaCard = ({ item }: MediaCardProps) => {
   return (
-    <Link href={`/detail/${item.media_type}/${item.id}`}>
+    <Link href={`/detail/${getMediaType(item)}/${item.id}`}>
       <div className="h-[76px] flex items-center relative overflow-hidden bg-gray-300">
         {/* 이미지 */}
         <div className="w-[146px] h-[76px] relative shrink-0">
