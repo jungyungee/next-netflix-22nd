@@ -20,7 +20,7 @@ const DetailPage = async ({ params }: { params: Promise<{ mediaType: string; id:
   const overviewText = (detail.overview || '').trim();
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="bg-black text-white">
       {/* 포스터 이미지 */}
       {detail.poster_path && (
         <div className="relative w-full h-[415px]">
@@ -30,7 +30,7 @@ const DetailPage = async ({ params }: { params: Promise<{ mediaType: string; id:
       )}
       {/* 재생 버튼 */}
       <div className="flex justify-center items-center mb-8">
-        <button className="bg-gray-100 text-black mx-6 px-8 h-[45px] w-[303px] rounded-[5.63px] inline-flex items-center justify-center gap-2 text-subhead1 leading-none hover:bg-gray-200 transition cursor-pointer">
+        <button className="bg-gray-100 text-black mx-6 px-8 h-[45px] w-[303px] rounded-[5.63px] inline-flex items-center justify-center gap-2 text-subhead1 leading-none cursor-pointer">
           <PlayIcon className="w-[18px] h-[21.6px] shrink-0" />
           <span className="text-subhead1 leading-none align-middle">Play</span>
         </button>
