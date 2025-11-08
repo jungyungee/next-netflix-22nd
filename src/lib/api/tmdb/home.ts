@@ -8,11 +8,12 @@ import { tmdbGet } from '@/lib/api/tmdbClient';
 /**
  * 오늘의 트렌딩 콘텐츠 (영화 + TV 프로그램)
  * 당일 가장 인기있는 모든 미디어를 가져옵니다.
+ * @param page - 페이지 번호 (기본값: 1)
  * @returns TMDB 트렌딩 데이터 (영화 및 TV 포함)
  */
-export const getTrendingAllDay = async () => {
+export const getTrendingAllDay = async (page: number = 1) => {
   try {
-    return await tmdbGet('/trending/all/day', { language: 'ko-KR' });
+    return await tmdbGet('/trending/all/day', { language: 'ko-KR', page });
   } catch (err) {
     console.error('getTrendingAllDay data error', err);
     return { results: [] } as const;
