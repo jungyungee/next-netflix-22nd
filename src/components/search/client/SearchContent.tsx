@@ -11,8 +11,9 @@ const SearchContent = () => {
 
   return (
     <div className="flex flex-col">
-      {/* 검색 입력창 */}
-      <div className="sticky top-0 z-40">
+      {/* 검색 입력창 및 헤더 */}
+      <div className="sticky top-0 z-40 bg-black">
+        <div className="h-11 bg-black" />
         <SearchInput onSearchChange={setSearchQuery} />
       </div>
 
