@@ -83,7 +83,7 @@ const TrendingBanner = ({ items }: TrendingBannerProps) => {
       </div>
       {/* PlayBar 컴포넌트 이동 (상세페이지로 이동 가능) */}
       <div className="mt-4">
-        <PlayBar mediaId={currentItem.id} mediaType={currentItem.media_type ?? 'movie'} />
+        <PlayBar mediaId={currentItem.id} mediaType="movie" />
       </div>
     </section>
   );
