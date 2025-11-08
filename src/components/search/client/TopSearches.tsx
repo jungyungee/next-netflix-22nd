@@ -1,68 +1,82 @@
 'use client';
 
-import { useQuery } from '@tanstack/react-query';
-import Image from 'next/image';
+import { useInfiniteQuery } from '@tanstack/react-query';
+import { useEffect, useRef } from 'react';
 
+import MediaCard from '@/components/search/client/MediaCard';
 import { getTrendingAllDay } from '@/lib/api/tmdb/home';
-import { getImageUrl } from '@/constants/imageURL';
 import type { Media } from '@/types/tmdb';
-import PlayButton from '@/svgs/search/playButton.svg';
 
 const TopSearches = () => {
-  const { data, isLoading, error } = useQuery({
+  const observerRef = useRef<HTMLDivElement>(null);
+
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading, error } = useInfiniteQuery({
     queryKey: ['topSearches'],
-    queryFn: getTrendingAllDay,
+    queryFn: ({ pageParam = 1 }) => getTrendingAllDay(pageParam),
+    getNextPageParam: (lastPage) => {
+      if ('total_pages' in lastPage && 'page' in lastPage) {
+        if (lastPage.page < lastPage.total_pages) {
+          return lastPage.page + 1;
+        }
+      }
+      return undefined;
+    },
+    initialPageParam: 1,
   });
+
+  // Intersection Observer로 무한 스크롤 구현
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && hasNextPage && !isFetchingNextPage) {
+          fetchNextPage();
+        }
+      },
+      { threshold: 0.5 },
+    );
+
+    if (observerRef.current) {
+      observer.observe(observerRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [hasNextPage, isFetchingNextPage, fetchNextPage]);
 
   if (isLoading) {
     return (
-      <div className="px-5 pb-4">
-        <h2 className="text-headline2">Top Searches</h2>
-        <div className="space-y-[19px]">
+      <div>
+        <h2 className="py-[21px] text-headline2 text-white">Top Searches</h2>
+        <div className="space-y-[2px]">
           {[...Array(7)].map((_, i) => (
-            <div key={i} className="bg-gray-300 h-[76px] rounded-[2px] animate-pulse" />
+            <div key={i} className="bg-gray-300 h-[76px] animate-pulse" />
           ))}
         </div>
       </div>
     );
   }
 
-  if (error || !data?.results) {
+  if (error || !data) {
     return null;
   }
 
-  const items = data.results.slice(0, 7) as Media[];
+  const allResults = data.pages.flatMap((page) => page.results) || [];
 
-  const getTitle = (item: Media) => {
-    if ('title' in item) return item.title;
-    if ('name' in item) return item.name;
-    return 'Unknown';
-  };
+  if (allResults.length === 0) {
+    return null;
+  }
 
   return (
     <div>
       <h2 className="py-[21px] text-headline2 text-white">Top Searches</h2>
       <div className="space-y-[2px]">
-        {items.map((item) => (
-          <div key={item.id} className="h-[76px] flex items-center relative overflow-hidden bg-gray-300">
-            {/* 이미지 */}
-            <div className="w-[146px] h-[76px] relative shrink-0">
-              <Image
-                src={getImageUrl(item.poster_path, 'SMALL') || '/placeholder.png'}
-                alt={getTitle(item)}
-                fill
-                sizes="146px"
-                className="object-cover"
-              />
-            </div>
-
-            {/* 제목 및 재생 버튼 */}
-            <div className="flex-1 flex items-center justify-between px-[19px]">
-              <h3 className="text-body2 text-white flex-1">{getTitle(item)}</h3>
-              <PlayButton className="w-7 h-7" />
-            </div>
-          </div>
+        {allResults.map((item) => (
+          <MediaCard key={`${item.id}-${item.media_type || 'unknown'}`} item={item as Media} />
         ))}
+      </div>
+
+      {/* 무한 스크롤 트리거 */}
+      <div ref={observerRef} className="h-20 flex items-center justify-center">
+        {isFetchingNextPage && <p className="text-white text-sm">Loading more...</p>}
       </div>
     </div>
   );
