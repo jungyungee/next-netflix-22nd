@@ -9,7 +9,6 @@ const MediaCardSkeleton = () => {
         <div className="flex-1 pr-4">
           <div className="h-4 bg-gray-200 animate-pulse rounded w-3/4" />
         </div>
-        <div className="w-7 h-7 bg-gray-200 animate-pulse rounded-full" />
       </div>
     </div>
   );

@@ -52,7 +52,7 @@ const SearchResults = ({ query }: SearchResultsProps) => {
       <div>
         <h2 className="py-[21px] text-headline2 text-white">Search Results</h2>
         <div className="space-y-[2px]">
-          {[...Array(5)].map((_, i) => (
+          {[...Array(8)].map((_, i) => (
             <MediaCardSkeleton key={i} />
           ))}
         </div>

@@ -49,7 +49,7 @@ const TopSearches = () => {
       <div>
         <h2 className="py-[21px] text-headline2 text-white">Top Searches</h2>
         <div className="space-y-[2px]">
-          {[...Array(7)].map((_, i) => (
+          {[...Array(8)].map((_, i) => (
             <MediaCardSkeleton key={i} />
           ))}
         </div>
