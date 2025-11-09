@@ -1,26 +1,29 @@
 'use client';
 
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 import SearchIcon from '@/svgs/common/searchIcon.svg';
 import XIcon from '@/svgs/common/xIcon.svg';
 
-interface SearchInputProps {
-  onSearchChange: (query: string) => void;
-}
-
-const SearchInput = ({ onSearchChange }: SearchInputProps) => {
-  const [query, setQuery] = useState('');
+const SearchInput = () => {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const [query, setQuery] = useState(searchParams.get('q') || '');
 
   useEffect(() => {
     const handler = setTimeout(() => {
-      onSearchChange(query);
+      if (query) {
+        router.push(`/search?q=${encodeURIComponent(query)}`);
+      } else {
+        router.push('/search');
+      }
     }, 300);
 
     return () => {
       clearTimeout(handler);
     };
-  }, [query, onSearchChange]);
+  }, [query, router]);
 
   return (
     <div className="h-[52px] w-full flex items-center justify-center px-5 bg-gray-300">
