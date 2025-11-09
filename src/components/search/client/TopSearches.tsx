@@ -4,6 +4,7 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import { useEffect, useRef } from 'react';
 
 import MediaCard from '@/components/search/client/MediaCard';
+import MediaCardSkeleton from '@/components/search/client/MediaCardSkeleton';
 import { getTrendingAllDay } from '@/lib/api/tmdb/home';
 import { removeDuplicateMedia } from '@/lib/utils/media';
 import type { Media } from '@/types/tmdb';
@@ -49,7 +50,7 @@ const TopSearches = () => {
         <h2 className="py-[21px] text-headline2 text-white">Top Searches</h2>
         <div className="space-y-[2px]">
           {[...Array(7)].map((_, i) => (
-            <div key={i} className="bg-gray-300 h-[76px] animate-pulse" />
+            <MediaCardSkeleton key={i} />
           ))}
         </div>
       </div>
