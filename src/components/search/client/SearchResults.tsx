@@ -1,22 +1,19 @@
 'use client';
 
-import { useInfiniteQuery } from '@tanstack/react-query';
-import { useEffect, useRef } from 'react';
-
 import MediaCard from '@/components/search/client/MediaCard';
-import MediaCardSkeleton from '@/components/search/client/MediaCardSkeleton';
+import MediaCardSkeleton from '@/components/search/skeletons/MediaCardSkeleton';
+import { useInfiniteScroll } from '@/hooks/search/useInfiniteScroll';
 import { searchMulti } from '@/lib/api/tmdb/search';
 import { removeDuplicateMedia } from '@/lib/utils/media';
-import type { Media } from '@/types/tmdb';
+import type { Media, TMDBListResponse } from '@/types/tmdb';
 
 interface SearchResultsProps {
   query: string;
+  initialData?: TMDBListResponse<Media>;
 }
 
-const SearchResults = ({ query }: SearchResultsProps) => {
-  const observerRef = useRef<HTMLDivElement>(null);
-
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading, error } = useInfiniteQuery({
+const SearchResults = ({ query, initialData }: SearchResultsProps) => {
+  const { data, observerRef, isFetchingNextPage, isLoading, error } = useInfiniteScroll({
     queryKey: ['searchResults', query],
     queryFn: ({ pageParam = 1 }) => searchMulti(query, pageParam),
     getNextPageParam: (lastPage) => {
@@ -25,27 +22,14 @@ const SearchResults = ({ query }: SearchResultsProps) => {
       }
       return undefined;
     },
-    initialPageParam: 1,
+    initialData: initialData
+      ? {
+          pages: [initialData],
+          pageParams: [1],
+        }
+      : undefined,
     enabled: !!query,
   });
-
-  // Intersection Observer로 무한 스크롤 구현
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting && hasNextPage && !isFetchingNextPage) {
-          fetchNextPage();
-        }
-      },
-      { threshold: 0.5 },
-    );
-
-    if (observerRef.current) {
-      observer.observe(observerRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, [hasNextPage, isFetchingNextPage, fetchNextPage]);
 
   if (isLoading) {
     return (
